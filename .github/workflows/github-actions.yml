@@ -24,4 +24,4 @@ jobs:
       - uses: srggrs/assign-one-project-github-action@1.2.1
         if: github.event.action == 'opened'
         with:
-          project: https://github.com/users/lmlLanuza/projects/2
+          project: 'https://github.com/users/lmlLanuza/projects/2'
