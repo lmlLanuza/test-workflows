@@ -12,7 +12,6 @@ jobs:
         uses: github/update-project-action@v2
         with:
           github_token: ${{ secrets.MY_GITHUB_TOKEN }}
-          organization: lmlLanuza
           project_number: 2
           operation: read
           content_id: ${{ github.event.client_payload.command.resource.id }}
