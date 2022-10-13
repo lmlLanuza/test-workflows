@@ -5,31 +5,28 @@ on:
      - opened
 
 jobs:
-  create_label:
+  add_label_to_issue:
     name: Create Labels
     runs-on: ubuntu-latest
     steps:
-      - uses: actions-cool/issues-helper@v3
+      - uses: andymckay/labeler@1.0.4
         with:
-          actions: 'create-label'
-          token: ${{ secrets.GITHUB_TOKEN }}
-          label-name: 'to-do'
-          label-color: '0095b3'
-          label-desc: 'The issue needs to be assigned to members'
-  
-  add_label_to_issue:
-      name: Set Labels
-      runs-on: ubuntu-latest
-      needs: create_label
-      steps:
+          add-labels: "to-do"
+
       - uses: actions-cool/issues-helper@v3
         with:
           actions: 'set-labels'
           token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.issue.number }}
           labels: 'to-do'
-      
+
+  add_to_project:
+    name: Add issue to project
+    if: contains(github.event.issue.labels.*.name, 'to-do')
+    needs: add_label_to_issue
+    runs-on: ubuntu-latest
+    steps:
       - uses: actions/add-to-project@v0.3.0
-        if: contains(github.event.issue.labels.*.name, 'to-do')
         with:
           project-url: https://github.com/users/lmlLanuza/projects/2
           github-token: ${{ secrets.MY_GITHUB_TOKEN }}
