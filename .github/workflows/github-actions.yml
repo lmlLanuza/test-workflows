@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: andymckay/labeler@1.0.4
         with:
-          add-labels: "bruh"
+          add-labels: "to-do"
 
   add_to_project:
     name: Add Issue to Project Board
