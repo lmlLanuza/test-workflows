@@ -16,6 +16,13 @@ jobs:
           label-name: 'to-do'
           label-color: '0095b3'
           label-desc: 'The issue needs to be assigned to members'
+
+      - uses: actions-cool/issues-helper@v3
+        with:
+          actions: 'set-labels'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.issue.number }}
+          labels: 'to-do'
       
       - uses: actions/add-to-project@v0.3.0
         if: contains(github.event.issue.labels.*.name, 'to-do')
