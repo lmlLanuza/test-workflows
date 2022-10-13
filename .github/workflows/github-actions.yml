@@ -12,12 +12,7 @@ jobs:
       - uses: andymckay/labeler@1.0.4
         with:
           add-labels: "to-do"
-
-  add_to_project:
-    name: Add issue to project
-    needs: add_label_to_issue
-    runs-on: ubuntu-latest
-    steps:
+      
       - uses: actions/add-to-project@v0.3.0
         if: contains(github.event.issue.labels.*.name, 'to-do')
         with:
