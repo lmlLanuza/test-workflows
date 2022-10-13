@@ -4,6 +4,9 @@ on:
     types:
      - opened
 
+env:
+  MY_GITHUB_TOKEN: ${{ secrets.SAMPLE_PROJECT }}
+
 jobs:
   add_label_to_issue:
     name: Create Labels
