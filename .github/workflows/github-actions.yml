@@ -21,9 +21,7 @@ jobs:
     needs: add_label_to_issue
     runs-on: ubuntu-latest
     steps:
-       - uses: actions/add-to-project@v0.3.0
-         with:
-          project-url: https://github.com/users/lmlLanuza/projects/2
-          github-token: MY_GITHUB_TOKEN
-          labeled: to-do
-          label-operator: OR
+      - uses: srggrs/assign-one-project-github-action@1.3.1
+        if: github.event.action == 'opened'
+        with:
+          project: https://github.com/users/lmlLanuza/projects/2
