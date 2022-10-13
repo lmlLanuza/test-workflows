@@ -13,17 +13,9 @@ jobs:
         with:
           add-labels: "to-do"
 
-      - uses: actions-cool/issues-helper@v3
-        with:
-          actions: 'set-labels'
-          token: ${{ secrets.GITHUB_TOKEN }}
-          issue-number: ${{ github.event.issue.number }}
-          labels: 'to-do'
 
   add_to_project:
     name: Add issue to project
-    if: |
-        contains(github.event.issues.labels.*.name, 'to-do')
     needs: add_label_to_issue
     runs-on: ubuntu-latest
     steps:
