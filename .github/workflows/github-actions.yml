@@ -9,9 +9,13 @@ jobs:
     name: Create Labels
     runs-on: ubuntu-latest
     steps:
-      - uses: andymckay/labeler@1.0.4
+      - uses: actions-cool/issues-helper@v3
         with:
-          add-labels: "to-do"
+          actions: 'create-label'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          label-name: 'to-do'
+          label-color: '0095b3'
+          label-desc: 'The issue needs to be assigned to members'
       
       - uses: actions/add-to-project@v0.3.0
         if: contains(github.event.issue.labels.*.name, 'to-do')
