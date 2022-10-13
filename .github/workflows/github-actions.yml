@@ -25,4 +25,3 @@ jobs:
         if: github.event.action == 'opened'
         with:
           project: 'https://github.com/users/lmlLanuza/projects/2'
-          column_name: 'Title'
