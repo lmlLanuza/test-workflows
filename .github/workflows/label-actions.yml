@@ -7,24 +7,7 @@ jobs:
   update_project:
     runs-on: ubuntu-latest
     steps:
-      - name: Read status
-        id: read_status
-        uses: github/update-project-action@v2
+      - uses: alex-page/github-project-automation-plus@v0.8.1
         with:
-          github_token: ${{ secrets.MY_GITHUB_TOKEN }}
-          project_number: 2
-          operation: read
-          content_id: ${{ github.event.client_payload.command.resource.id }}
-      - name: Output status
-        run: |
-          echo "Current status value: ${{ steps.read_status.outputs.field_read_value }}"
-      - name: Update status
-        id: update_status
-        uses: github/update-project-action@v2
-        with:
-          github_token: ${{ secrets.MY_GITHUB_TOKEN }}
-          organization: github
-          project_number: 2
-          content_id: ${{ github.event.client_payload.command.resource.id }}
-          field: Status
-          value: in-progress
+          project: lmlLanuza/sample-project
+          column:  Status
