@@ -11,4 +11,4 @@ jobs:
         with:
           project: lmlLanuza/sample-project
           column:  Status
-          repo-token: ${{ secrets.MY_GITHUB_TOKEN }}
+          repo-token: ${{ secrets.GHPROJECT_TOKEN }}
