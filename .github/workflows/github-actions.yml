@@ -5,7 +5,7 @@ on:
      - opened
 
 env:
-  MY_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  MY_GITHUB_TOKEN: ${{ secrets.SAMPLE_PROJECT }}
 
 jobs:
   add_label_to_issue:
