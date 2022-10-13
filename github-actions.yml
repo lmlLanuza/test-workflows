@@ -1,0 +1,24 @@
+name: GitHub Actions For Issues
+on:
+  issues:
+    types:
+     - opened
+
+jobs:
+  add_label_to_issue:
+    name: Create Labels
+    runs-on: ubuntu-latest
+    steps:
+      - uses: andymckay/labeler@1.0.4
+        with:
+          add-labels: "bruh"
+
+  add_to_project:
+    name: Add Issue to Project Board
+    needs: add_label_to_issue
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/add-to-project@v0.3.0
+        with:
+          project-url: https://github.com/users/lmlLanuza/projects/1
+          github-token: ${{ secrets.SAMPLE_PROJECT }}
