@@ -10,7 +10,7 @@ jobs:
     - uses: konradpabjan/move-labeled-or-milestoned-issue@v2.0
       with:
         action-token: "${{ secrets.MY_GITHUB_TOKEN }}"
-        project-url: "https://github.com/users/lmlLanuza/projects/2"
+        project-url: "https://github.com/lmlLanuza/test-workflows/projects/2"
         column-name: "in-progress"
         label-name: "in-progress"
         columns-to-ignore: "Done"
