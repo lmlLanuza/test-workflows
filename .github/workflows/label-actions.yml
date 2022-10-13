@@ -10,4 +10,4 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GITHUB_PROJECT_URL: https://github.com/lmlLanuza/test-workflows/projects/2
-        GITHUB_PROJECT_COLUMN_NAME: to-do
+        GITHUB_PROJECT_COLUMN_NAME: in-progress
