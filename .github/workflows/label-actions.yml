@@ -9,6 +9,6 @@ jobs:
     steps:
     - uses: alex-page/github-project-automation-plus@v0.8.1
       with:
-        project: sample-project
+        project: "https://github.com/lmlLanuza/test-workflows/projects/2"
         column: in-progress
         repo-token: ${{ secrets.MY_GITHUB_TOKEN }}
