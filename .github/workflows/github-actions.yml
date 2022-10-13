@@ -22,3 +22,4 @@ jobs:
         with:
           project-url: https://github.com/users/lmlLanuza/projects/1
           github-token: ${{ secrets.SAMPLE_PROJECT }}
+          labeled: to-do
