@@ -1,0 +1,15 @@
+name: Add Labels to New Issues
+on:
+  issues:
+    types:
+     - opened
+
+jobs:
+  add_label_to_issue:
+    name: Create Labels
+    runs-on: ubuntu-latest
+    steps:
+      - uses: andymckay/labeler@1.0.4
+        with:
+          #Add the label for the opened issue
+          add-labels: "to-do"
