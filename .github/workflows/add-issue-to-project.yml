@@ -1,0 +1,26 @@
+name: Add Issue to Repository Project
+on:
+  workflow_run:
+    workflows:
+      - "Add Labels to New Issues"
+    types:
+      - completed
+      
+  issues:
+    types:
+      - labeled
+
+jobs:
+ add_to_project:
+    name: Add Issue to Repository Project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/add-to-project@v0.3.0
+        with:
+          #Enter the project's URL
+          project-url: https://github.com/users/lmlLanuza/projects/2
+          #Add a repository secret in your repository settings and use it here
+          github-token: ${{ secrets.MY_GITHUB_TOKEN }}
+          #Issues that have the specified label will be added to the project (Currently not working)
+          #labeled: to-do
+          #label-operator: OR
