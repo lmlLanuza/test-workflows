@@ -1,14 +1,10 @@
 name: Add Issue to Repository Project
-on:
-  workflow_run:
-    workflows:
-      - "Add Labels to New Issues"
-    types:
-      - completed
-      
+on:   
   issues:
     types:
       - labeled
+      
+  workflow_call:
 
 jobs:
  add_to_project:

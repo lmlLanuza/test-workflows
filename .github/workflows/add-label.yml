@@ -5,7 +5,7 @@ on:
      - opened
 
 jobs:
-  add_label_to_issue:
+  add-label-to-issue:
     name: Create Labels
     runs-on: ubuntu-latest
     steps:
@@ -13,3 +13,8 @@ jobs:
         with:
           #Add the label for the opened issue
           add-labels: "to-do"
+  
+  call-add-to-project:
+    # {owner}/{repo}/.github/workflows/{filename}@{ref} for reusable workflows in public repositories.
+    # ./.github/workflows/{filename} for reusable workflows in the same repository.
+    uses: ./.github/workflows/add-issue-to-project.yml
