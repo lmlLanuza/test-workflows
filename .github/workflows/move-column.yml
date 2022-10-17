@@ -13,3 +13,5 @@ jobs:
           project-number: 2
           column-name: in-progress
           issue-number: 44
+      - name: Check output
+        run: echo ${{ steps.coupc.outputs.card-id }}
