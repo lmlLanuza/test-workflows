@@ -1,10 +1,13 @@
 name: Add Issue to Repository Project
 on:   
-  issues:
-    types:
-      - labeled
-      
   workflow_call:
+    inputs:
+      project-url:
+        type: string
+        required: true
+    secrets:
+      github-token:
+        required: true
 
 jobs:
  add_to_project:
@@ -14,9 +17,9 @@ jobs:
       - uses: actions/add-to-project@v0.3.0
         with:
           #Enter the project's URL
-          project-url: https://github.com/users/lmlLanuza/projects/2
+          project-url: ${{ inputs.project-url }}
           #Add a repository secret in your repository settings and use it here
-          github-token: ${{ secrets.MY_GITHUB_TOKEN }}
+          github-token: ${{ secrets.github-token }}
           #Issues that have the specified label will be added to the project (Currently not working)
           #labeled: to-do
           #label-operator: OR

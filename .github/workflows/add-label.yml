@@ -18,3 +18,7 @@ jobs:
     # {owner}/{repo}/.github/workflows/{filename}@{ref} for reusable workflows in public repositories.
     # ./.github/workflows/{filename} for reusable workflows in the same repository.
     uses: ./.github/workflows/add-issue-to-project.yml
+    with:
+        project-url: https://github.com/users/lmlLanuza/projects/2
+    secrets:
+        github-token: ${{ secrets.MY_GITHUB_TOKEN }}
