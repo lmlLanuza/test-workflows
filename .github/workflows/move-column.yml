@@ -1,4 +1,4 @@
-name: Add PR to project
+name: Move issue to in-progress board
 on:
   issues:
     types:
@@ -122,7 +122,7 @@ jobs:
       
       - name: Update status in Projects
         env: 
-          GH_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh api graphql -f query='
             mutation {
