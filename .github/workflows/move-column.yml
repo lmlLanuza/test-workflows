@@ -3,6 +3,10 @@ on:
   issues:
     types:
       - labeled
+
+env: 
+  GH_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+
 jobs:
   track_issues:
     runs-on: ubuntu-latest
@@ -121,8 +125,6 @@ jobs:
               }'
       
       - name: Update status in Projects
-        env: 
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh api graphql -f query='
             mutation {
