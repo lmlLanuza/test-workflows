@@ -1,17 +1,143 @@
+name: Add PR to project
 on:
   issues:
     types:
       - labeled
 jobs:
-  createCard:
+  track_issues:
     runs-on: ubuntu-latest
     steps:
-      - name: Update Issue Status
-        uses: peter-evans/create-or-update-project-card@v2.0.1
-        with:
-          token: ${{ secrets.MY_GITHUB_TOKEN }}
-          project-name: sample-project
-          project-number: 2
-          column-name: in-progress
-      - name: Check output
-        run: echo ${{ steps.coupc.outputs.card-id }}
+    
+      - name: Get project node ID #Project ID: PVT_kwHOBGEuI84AHIcw
+        run: |
+          gh api graphql -f query='
+            query{
+              user(login: "lmlLanuza"){
+                projectV2(number: 2) {
+                  id
+                }
+              }
+            }'
+
+      - name: Get field node ID   #Status ID: PVTSSF_lAHOBGEuI84AHIcwzgEHDpY | to-do option ID: f75ad846 |  #in-progress: 47fc9ee4
+        run: | 
+          gh api graphql -f query='
+            query{
+              node(id: "PVT_kwHOBGEuI84AHIcw") {
+                ... on ProjectV2 {
+                  fields(first: 20) {
+                    nodes {
+                      ... on ProjectV2Field {
+                        id
+                        name
+                      }
+                      ... on ProjectV2IterationField {
+                        id
+                        name
+                        configuration {
+                          iterations {
+                            startDate
+                            id
+                          }
+                        }
+                      }
+                      ... on ProjectV2SingleSelectField {
+                        id
+                        name
+                        options {
+                          id
+                          name
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }'
+      
+      - name: Get item field ID  #Item ID: PVTI_lAHOBGEuI84AHIcwzgDAQNo
+        run: |
+          gh api graphql -f query='
+            query{
+              node(id: "PVT_kwHOBGEuI84AHIcw") {
+                ... on ProjectV2 {
+                  items(first: 20) {
+                    nodes{
+                      id
+                      fieldValues(first: 8) {
+                        nodes{                
+                          ... on ProjectV2ItemFieldTextValue {
+                            text
+                            field {
+                              ... on ProjectV2FieldCommon {
+                                name
+                                }
+                              }
+                            }
+                          ... on ProjectV2ItemFieldDateValue {
+                            date
+                              field {
+                                ... on ProjectV2FieldCommon {
+                                  name
+                                }
+                              }
+                            }
+                          ... on ProjectV2ItemFieldSingleSelectValue {
+                            name
+                              field {
+                                ... on ProjectV2FieldCommon {
+                                  name
+                                }
+                              }
+                            }
+                          }              
+                        }
+                        content{              
+                          ... on DraftIssue {
+                            title
+                            body
+                          }
+                          ... on Issue {
+                            title
+                            assignees(first: 10) {
+                              nodes{
+                                login
+                              }
+                            }
+                          }
+                          ... on PullRequest {
+                            title
+                            assignees(first: 10) {
+                              nodes{
+                                login
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }'
+      
+      - name: Update status in Projects
+        env: 
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+        run: |
+          gh api graphql -f query='
+            mutation {
+              updateProjectV2ItemFieldValue(
+                input: {
+                  projectId: "PROJECT_ID"
+                  itemId: "ITEM_ID"
+                  fieldId: "FIELD_ID"
+                  value: { 
+                    singleSelectOptionId: "OPTION_ID"        
+                  }
+                }
+              ) {
+                projectV2Item {
+                  id
+                }
+              }
+            }'
