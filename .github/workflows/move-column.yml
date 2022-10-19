@@ -122,7 +122,7 @@ jobs:
       
       - name: Update status in Projects
         env: 
-          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
         run: |
           gh api graphql -f query='
             mutation {
