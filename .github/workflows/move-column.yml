@@ -156,9 +156,9 @@ jobs:
                 input: {
                   projectId: $project
                   itemId: $issue
-                  fieldId: $status-field
+                  fieldId: $statusfield
                   value: { 
-                    singleSelectOptionId: $in-progress        
+                    singleSelectOptionId: $inprogress        
                   }
                 }
               ) {
@@ -166,4 +166,4 @@ jobs:
                   id
                 }
               }
-            }' -f project=$PROJECT_ID -f issue=$ISSUE_ID -f status-field=$STATUS_FIELD_ID -f in-progress=$INPROGRESS_OPTION_ID
+            }' -f project=$PROJECT_ID -f issue=$ISSUE_ID -f statusfield=$STATUS_FIELD_ID -f inprogress=$INPROGRESS_OPTION_ID
