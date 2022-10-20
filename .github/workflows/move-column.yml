@@ -7,6 +7,9 @@ on:
 
 env: 
   GH_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+  USER: lmlLanuza
+  PROJECT_NUMBER: 2
+  ISSUE_ID: ${{ github.event.issues.node_id }}
 
 jobs:
   track_issues:
@@ -17,12 +20,14 @@ jobs:
         run: |
           gh api graphql -f query='
             query{
-              user(login: "lmlLanuza"){
-                projectV2(number: 2) {
+              user(login: "$user"){
+                projectV2(number: $number) {
                   id
                 }
               }
-            }'
+            }' -f user=$USER -F number=$PROJECT_NUMBER > project_data.json
+
+           echo 'PROJECT_ID='$(jq '.data.organization.projectV2.id' project_data.json) >> $GITHUB_ENV
 
       - name: Get field node ID   #Status ID: PVTSSF_lAHOBGEuI84AHIcwzgEHDpY | to-do option ID: f75ad846 |  #in-progress: 47fc9ee4
         run: | 
@@ -131,8 +136,8 @@ jobs:
             mutation {
               updateProjectV2ItemFieldValue(
                 input: {
-                  projectId: "PVT_kwHOBGEuI84AHIcw"
-                  itemId: "PVTI_lAHOBGEuI84AHIcwzgDAQNo"
+                  projectId: $project
+                  itemId: $issue
                   fieldId: "PVTSSF_lAHOBGEuI84AHIcwzgEHDpY"
                   value: { 
                     singleSelectOptionId: "47fc9ee4"        
@@ -143,4 +148,4 @@ jobs:
                   id
                 }
               }
-            }'
+            }' -f project=$PROJECT_ID -f issue=$ISSUE_ID
