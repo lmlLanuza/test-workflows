@@ -22,7 +22,7 @@ jobs:
               user(login: $user){
                 projectV2(number: $number) {
                   id
-                  fields(first:20) {
+                  fields(last:20) {
                     nodes {
                       ... on ProjectV2Field {
                         id
