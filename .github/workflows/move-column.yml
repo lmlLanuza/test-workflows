@@ -9,7 +9,7 @@ env:
   GH_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
   USER: lmlLanuza
   PROJECT_NUMBER: 2
-  ISSUE_ID: PVTI_lAHOBGEuI84AHIcwzgDAQNo   #${{ github.event.issue.node_id }}
+  ISSUE_ID: PVTI_lAHOBGEuI84AHIcwzgDBagg   #${{ github.event.issue.node_id }}
 
 jobs:
   track_issues:
