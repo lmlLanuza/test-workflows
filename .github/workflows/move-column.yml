@@ -126,7 +126,6 @@ jobs:
               }'
       
       - name: Update status in Projects
-        if: contains( toJson(github.event), 'to-do' )
         run: |
           gh api graphql -f query='
             mutation {
