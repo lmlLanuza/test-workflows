@@ -3,7 +3,6 @@ on:
   issues:
     types:
       - labeled
-          
 
 env: 
   GH_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
@@ -158,7 +157,7 @@ jobs:
                   itemId: $issue
                   fieldId: $statusfield
                   value: { 
-                    singleSelectOptionId: $inprogress        
+                    singleSelectOptionId: $inprogress
                   }
                 }
               ) {
