@@ -5,16 +5,18 @@ on:
       - labeled
           
 
+env: 
+  GH_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+  USER: lmlLanuza
+  PROJECT_NUMBER: 2
+  ISSUE_ID: ${{ github.event.issues.node_id }}
+
 jobs:
   track_issues:
     runs-on: ubuntu-latest
     steps:
     
       - name: Get project node ID #Project ID: PVT_kwHOBGEuI84AHIcw
-        env: 
-          GH_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
-          USER: lmlLanuza
-          PROJECT_NUMBER: 2
         run: |
           gh api graphql -f query='
             query($user: String!, $number: Int!){
@@ -129,9 +131,6 @@ jobs:
               }'
       
       - name: Update status in Projects
-        env: 
-          GH_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
-          ISSUE_ID: ${{ github.event.issues.node_id }}
         run: |
           gh api graphql -f query='
             mutation {
