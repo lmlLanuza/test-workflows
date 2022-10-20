@@ -3,6 +3,7 @@ on:
   issues:
     types:
       - labeled
+          
 
 env: 
   GH_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
@@ -125,6 +126,7 @@ jobs:
               }'
       
       - name: Update status in Projects
+        if: contains( toJson(github.event), 'to-do' )
         run: |
           gh api graphql -f query='
             mutation {
