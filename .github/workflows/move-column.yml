@@ -44,8 +44,6 @@ jobs:
 
            echo 'PROJECT_ID='$(jq '.data.user.projectV2.id' project_data.json) >> $GITHUB_ENV
            echo 'STATUS_FIELD_ID='$(jq '.data.user.projectV2.fields.nodes[] | select(.name== "Status") | .id' project_data.json) >> $GITHUB_ENV
-           echo 'TODO_OPTION_ID='$(jq '.data.user.projectV2.fields.nodes[] | select(.name== "Status") | .options[] | select(.name=="to-do") |.id' project_data.json) >> $GITHUB_ENV
-           echo 'INPROGRESS_OPTION_ID='$(jq '.data.user.projectV2.fields.nodes[] | select(.name== "Status") | .options[] | select(.name=="in-progress") |.id' project_data.json) >> $GITHUB_ENV
       - name: Get field node ID   #Status ID: PVTSSF_lAHOBGEuI84AHIcwzgEHDpY | to-do option ID: f75ad846 |  #in-progress: 47fc9ee4
         run: | 
           gh api graphql -f query='
@@ -150,14 +148,14 @@ jobs:
       - name: Update status in Projects
         run: |
           gh api graphql -f query='
-            mutation($project:ID!, $issue:ID!, $statusfield:ID!, $inprogress:String!) {
+            mutation($project:ID!, $issue:ID!) {
               updateProjectV2ItemFieldValue(
                 input: {
                   projectId: $project
                   itemId: $issue
-                  fieldId: $statusfield
+                  fieldId: PVTSSF_lAHOBGEuI84AHIcwzgEHDpY
                   value: { 
-                    singleSelectOptionId: $inprogress
+                    singleSelectOptionId: 47fc9ee4
                   }
                 }
               ) {
@@ -165,4 +163,4 @@ jobs:
                   id
                 }
               }
-            }' -f project=$PROJECT_ID -f issue=$ISSUE_ID -f statusfield=$STATUS_FIELD_ID -f inprogress=$INPROGRESS_OPTION_ID
+            }' -f project=$PROJECT_ID -f issue=$ISSUE_ID
