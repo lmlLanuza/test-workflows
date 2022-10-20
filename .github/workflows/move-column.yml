@@ -153,9 +153,9 @@ jobs:
                 input: {
                   projectId: $project
                   itemId: $issue
-                  fieldId: PVTSSF_lAHOBGEuI84AHIcwzgEHDpY
+                  fieldId: $statusfield
                   value: { 
-                    singleSelectOptionId: 47fc9ee4
+                    singleSelectOptionId: "47fc9ee4"
                   }
                 }
               ) {
@@ -163,4 +163,4 @@ jobs:
                   id
                 }
               }
-            }' -f project=$PROJECT_ID -f issue=$ISSUE_ID
+            }' -f project=$PROJECT_ID -f issue=$ISSUE_ID -f statusfield=$STATUS_FIELD_ID
