@@ -151,7 +151,7 @@ jobs:
       - name: Update status in Projects
         run: |
           gh api graphql -f query='
-            mutation($project:ID!, $issue:ID!) {
+            mutation($project:ID!, $issue:ID!, $statusfield:ID!, $inprogress:ID!) {
               updateProjectV2ItemFieldValue(
                 input: {
                   projectId: $project
