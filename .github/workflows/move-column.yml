@@ -148,4 +148,4 @@ jobs:
                   id
                 }
               }
-            }' -f project=$PROJECT_ID -f issue=$ISSUE_ID
+            }' -f project=$PROJECT_ID -f issue=$ISSUE_ID --jq '.data.updateProjectV2ItemFieldValue.id')" 
